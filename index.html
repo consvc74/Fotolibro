@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="es">
 <head>
@@ -7,18 +6,158 @@
   <title>Fotolibros de autor | Cons Vazquez</title>
   <meta name="description" content="Fotolibros de autor para viajes, historias familiares y proyectos especiales. Diseño editorial y proceso completo.">
 
-  <!-- Google Fonts -->
+  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="./styles.css">
+  <style>
+    :root{
+      --bg:#f6f3ee; --paper:rgba(255,255,255,.78);
+      --text:#1f1c18; --muted:rgba(31,28,24,.70);
+      --line:rgba(31,28,24,.12);
+      --shadow:0 18px 55px rgba(0,0,0,.10);
+      --shadow2:0 10px 30px rgba(0,0,0,.08);
+      --r:22px; --r2:28px;
+      --serif:"Cormorant Garamond", serif;
+      --sans:"Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:var(--sans); color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(208,196,175,.25), transparent 55%),
+        radial-gradient(900px 600px at 85% 0%, rgba(160,185,200,.18), transparent 55%),
+        var(--bg);
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1100px, calc(100% - 40px)); margin:0 auto}
+
+    /* Header */
+    .header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(246,243,238,.78);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 0}
+    .brand__name{font-family:var(--serif);font-size:22px;letter-spacing:.2px}
+    .brand__tag{font-size:12px;color:var(--muted);margin-top:2px}
+    .nav__links{display:flex;gap:14px;align-items:center}
+    .nav__links a{font-size:13px;color:var(--muted);padding:8px 10px;border-radius:999px}
+    .nav__links a:hover{background:rgba(255,255,255,.55);color:var(--text)}
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 16px;border-radius:999px;border:1px solid var(--line);
+      font-size:14px;font-weight:500;
+      transition:transform .08s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn--primary{
+      background:rgba(31,28,24,.92);color:#fff;border-color:rgba(31,28,24,.92);
+      box-shadow:0 10px 25px rgba(0,0,0,.14);
+    }
+    .btn--primary:hover{box-shadow:0 14px 32px rgba(0,0,0,.18)}
+    .btn--ghost{background:rgba(255,255,255,.55)}
+    .btn--ghost:hover{background:rgba(255,255,255,.80)}
+    .btn--full{width:100%}
+
+    /* Hero */
+    .hero{position:relative;padding:64px 0 44px;overflow:hidden}
+    .hero__bg{
+      position:absolute;inset:0;
+      background:
+        linear-gradient(180deg, rgba(246,243,238,.15), rgba(246,243,238,.92) 72%),
+        url("img/hero.jpg");
+      background-size:cover;background-position:center;
+      transform:scale(1.02);filter:saturate(1.02) contrast(1.03);
+    }
+    .hero__bg::after{
+      content:"";position:absolute;inset:0;
+      background:radial-gradient(800px 380px at 25% 20%, rgba(255,255,255,.35), transparent 60%);
+    }
+    .hero__grid{
+      position:relative;display:grid;grid-template-columns:1.35fr .75fr;
+      gap:26px;align-items:start;
+    }
+    h1{font-family:var(--serif);font-size:54px;margin:0 0 10px;letter-spacing:.2px}
+    .lead{margin:0 0 10px;font-size:18px;color:rgba(31,28,24,.85)}
+    .lead2{margin:0 0 20px;font-size:15px;line-height:1.55;color:var(--muted);max-width:62ch}
+    .hero__cta{display:flex;gap:12px;flex-wrap:wrap}
+
+    /* Card */
+    .card{
+      background:var(--paper);border:1px solid var(--line);border-radius:var(--r2);
+      box-shadow:var(--shadow);padding:18px;
+    }
+    .card__title{font-family:var(--serif);font-size:22px;margin:0 0 8px}
+    .card__text{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.5}
+
+    /* Sections */
+    .section{padding:54px 0}
+    .section--soft{
+      background:rgba(255,255,255,.35);
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    }
+    h2{font-family:var(--serif);font-size:34px;margin:0 0 18px}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+    /* Pricing */
+    .pricing{
+      background:rgba(255,255,255,.65);border:1px solid var(--line);
+      border-radius:var(--r2);padding:18px;box-shadow:var(--shadow2);
+    }
+    .pricing h3{font-family:var(--serif);font-size:24px;margin:0 0 10px}
+    .option{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+    .price{display:inline-block;font-weight:600;margin-left:8px}
+    .pricing ul{margin:10px 0 0;padding-left:18px;color:var(--muted);line-height:1.55;font-size:14px}
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .gallery img{
+      width:100%;height:360px;object-fit:cover;
+      border-radius:var(--r2);border:1px solid var(--line);
+      box-shadow:var(--shadow2);background:#fff;
+    }
+
+    /* Contact */
+    .contact{display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .contact p{margin:0;color:var(--muted)}
+
+    /* Footer */
+    .footer{padding:22px 0 40px;color:var(--muted);font-size:13px}
+
+    /* WhatsApp floating */
+    .wa-float{
+      position:fixed;right:18px;bottom:18px;z-index:99;
+      display:inline-flex;align-items:center;justify-content:center;
+      width:54px;height:54px;border-radius:999px;
+      background:rgba(31,28,24,.92);color:#fff;
+      border:1px solid rgba(255,255,255,.15);
+      box-shadow:0 18px 45px rgba(0,0,0,.22);
+    }
+    .wa-float__icon{font-weight:700;letter-spacing:.6px}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .nav__links{display:none}
+      h1{font-size:42px}
+      .hero__grid{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .gallery{grid-template-columns:1fr}
+      .gallery img{height:300px}
+      .contact{flex-direction:column;align-items:flex-start}
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header class="header">
   <div class="container nav">
     <div class="brand">
@@ -38,7 +177,6 @@
 
 <main>
 
-<!-- HERO -->
 <section class="hero hero--image">
   <div class="hero__bg"></div>
 
@@ -72,13 +210,11 @@
   </div>
 </section>
 
-<!-- OPCIONES -->
 <section id="opciones" class="section">
   <div class="container">
     <h2>Opciones de fotolibros</h2>
 
     <div class="grid">
-
       <article class="pricing">
         <h3>Viaje</h3>
 
@@ -113,7 +249,7 @@
         </div>
       </article>
 
-      <article class="pricing pricing--featured">
+      <article class="pricing">
         <h3>Historia familiar</h3>
         <span class="price">ARS 240.000</span>
         <ul>
@@ -134,16 +270,13 @@
           <li>3 rondas de ajustes</li>
         </ul>
       </article>
-
     </div>
   </div>
 </section>
 
-<!-- GALERÍA -->
 <section id="galeria" class="section section--soft">
   <div class="container">
     <h2>Ejemplos</h2>
-
     <div class="gallery">
       <img src="img/bali.jpg" alt="Fotolibro de viaje Bali">
       <img src="img/australia.jpg" alt="Fotolibro de viaje Australia">
@@ -151,7 +284,6 @@
   </div>
 </section>
 
-<!-- CONTACTO -->
 <section id="contacto" class="section">
   <div class="container contact">
     <div>
@@ -169,14 +301,10 @@
 
 </main>
 
-<!-- WhatsApp flotante -->
-<a class="wa-float"
-   href="https://wa.me/5493513532090"
-   target="_blank">
+<a class="wa-float" href="https://wa.me/5493513532090" target="_blank">
   <span class="wa-float__icon">WA</span>
 </a>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="container">
     <p>© Cons Vazquez · Córdoba, Argentina</p>
