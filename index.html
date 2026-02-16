@@ -3,8 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fotolibros de autor | Cons Vazquez</title>
-  <meta name="description" content="Fotolibros de autor para viajes, historias familiares y proyectos especiales. Diseño editorial y proceso completo.">
+  <title>Fotolibros personalizados de autor | Cons Vazquez</title>
+  <meta name="description" content="Fotolibros personalizados de autor para viajes e historias familiares. Diseño editorial, curaduría estética y proceso completo. Contacto por WhatsApp.">
+
+  <!-- Open Graph (mejora vista al compartir en WhatsApp/Redes) -->
+  <meta property="og:title" content="Fotolibros personalizados de autor | Cons Vazquez">
+  <meta property="og:description" content="Historias que se tocan y se guardan. Diseño editorial + proceso completo.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="img/hero.jpg">
 
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,11 +40,22 @@
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
     .container{width:min(1100px, calc(100% - 40px)); margin:0 auto}
+    .sr-only{
+      position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+      clip:rect(0,0,0,0);white-space:nowrap;border:0;
+    }
+
+    /* Focus visible */
+    a:focus-visible, button:focus-visible{
+      outline:3px solid rgba(31,28,24,.35);
+      outline-offset:3px;
+      border-radius:999px;
+    }
 
     /* Header */
     .header{
       position:sticky;top:0;z-index:50;
-      background:rgba(246,243,238,.78);
+      background:rgba(246,243,238,.82);
       backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
     }
@@ -48,6 +65,7 @@
     .nav__links{display:flex;gap:14px;align-items:center}
     .nav__links a{font-size:13px;color:var(--muted);padding:8px 10px;border-radius:999px}
     .nav__links a:hover{background:rgba(255,255,255,.55);color:var(--text)}
+    .nav__cta{display:flex;gap:10px;align-items:center}
 
     /* Buttons */
     .btn{
@@ -55,6 +73,7 @@
       padding:12px 16px;border-radius:999px;border:1px solid var(--line);
       font-size:14px;font-weight:500;
       transition:transform .08s ease, box-shadow .2s ease, background .2s ease;
+      white-space:nowrap;
     }
     .btn:active{transform:translateY(1px)}
     .btn--primary{
@@ -66,8 +85,21 @@
     .btn--ghost:hover{background:rgba(255,255,255,.80)}
     .btn--full{width:100%}
 
+    /* Small badge */
+    .pill{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:8px 12px;border-radius:999px;
+      background:rgba(255,255,255,.55);
+      border:1px solid var(--line);
+      color:rgba(31,28,24,.78);
+      font-size:12px;
+      width:fit-content;
+      margin-bottom:14px;
+    }
+    .dot{width:6px;height:6px;border-radius:999px;background:rgba(31,28,24,.55)}
+
     /* Hero */
-    .hero{position:relative;padding:64px 0 44px;overflow:hidden}
+    .hero{position:relative;padding:62px 0 46px;overflow:hidden}
     .hero__bg{
       position:absolute;inset:0;
       background:
@@ -78,16 +110,17 @@
     }
     .hero__bg::after{
       content:"";position:absolute;inset:0;
-      background:radial-gradient(800px 380px at 25% 20%, rgba(255,255,255,.35), transparent 60%);
+      background:radial-gradient(900px 420px at 25% 20%, rgba(255,255,255,.38), transparent 60%);
     }
     .hero__grid{
       position:relative;display:grid;grid-template-columns:1.35fr .75fr;
       gap:26px;align-items:start;
     }
     h1{font-family:var(--serif);font-size:54px;margin:0 0 10px;letter-spacing:.2px}
-    .lead{margin:0 0 10px;font-size:18px;color:rgba(31,28,24,.85)}
-    .lead2{margin:0 0 20px;font-size:15px;line-height:1.55;color:var(--muted);max-width:62ch}
+    .lead{margin:0 0 10px;font-size:18px;color:rgba(31,28,24,.86)}
+    .lead2{margin:0 0 18px;font-size:15px;line-height:1.6;color:var(--muted);max-width:64ch}
     .hero__cta{display:flex;gap:12px;flex-wrap:wrap}
+    .micro{margin:14px 0 0;color:rgba(31,28,24,.62);font-size:12.5px}
 
     /* Card */
     .card{
@@ -95,7 +128,7 @@
       box-shadow:var(--shadow);padding:18px;
     }
     .card__title{font-family:var(--serif);font-size:22px;margin:0 0 8px}
-    .card__text{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.5}
+    .card__text{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.55}
 
     /* Sections */
     .section{padding:54px 0}
@@ -103,45 +136,72 @@
       background:rgba(255,255,255,.35);
       border-top:1px solid var(--line);border-bottom:1px solid var(--line);
     }
-    h2{font-family:var(--serif);font-size:34px;margin:0 0 18px}
+    h2{font-family:var(--serif);font-size:34px;margin:0 0 14px}
+    .subtitle{margin:0 0 22px;color:var(--muted);max-width:70ch;line-height:1.6}
 
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+    /* Feature cards */
+    .feat{
+      background:rgba(255,255,255,.65);
+      border:1px solid var(--line);
+      border-radius:var(--r2);
+      padding:16px;
+      box-shadow:var(--shadow2);
+    }
+    .feat h3{font-family:var(--serif);font-size:22px;margin:0 0 8px}
+    .feat p{margin:0;color:var(--muted);line-height:1.55;font-size:14px}
 
     /* Pricing */
     .pricing{
       background:rgba(255,255,255,.65);border:1px solid var(--line);
       border-radius:var(--r2);padding:18px;box-shadow:var(--shadow2);
+      display:flex;flex-direction:column;gap:12px;
     }
-    .pricing h3{font-family:var(--serif);font-size:24px;margin:0 0 10px}
-    .option{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
-    .price{display:inline-block;font-weight:600;margin-left:8px}
+    .pricing h3{font-family:var(--serif);font-size:24px;margin:0}
+    .price{display:inline-block;font-weight:600}
+    .option{border-top:1px solid var(--line);padding-top:12px;margin-top:2px}
     .pricing ul{margin:10px 0 0;padding-left:18px;color:var(--muted);line-height:1.55;font-size:14px}
+    .pricing__meta{display:flex;gap:10px;flex-wrap:wrap;color:rgba(31,28,24,.65);font-size:12px}
+    .tag{
+      background:rgba(255,255,255,.55);border:1px solid var(--line);
+      padding:6px 10px;border-radius:999px;
+    }
 
     /* Gallery */
     .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .gallery figure{
+      margin:0;
+      background:rgba(255,255,255,.55);
+      border:1px solid var(--line);
+      border-radius:var(--r2);
+      overflow:hidden;
+      box-shadow:var(--shadow2);
+    }
     .gallery img{
-      width:100%;height:360px;object-fit:cover;
-      border-radius:var(--r2);border:1px solid var(--line);
-      box-shadow:var(--shadow2);background:#fff;
+      width:100%;height:360px;object-fit:cover;background:#fff;
+    }
+    .gallery figcaption{
+      padding:12px 14px;color:rgba(31,28,24,.70);font-size:13px;line-height:1.45;
     }
 
     /* Contact */
     .contact{display:flex;align-items:center;justify-content:space-between;gap:18px}
-    .contact p{margin:0;color:var(--muted)}
+    .contact p{margin:0;color:var(--muted);line-height:1.6}
 
     /* Footer */
-    .footer{padding:22px 0 40px;color:var(--muted);font-size:13px}
+    .footer{padding:22px 0 44px;color:var(--muted);font-size:13px}
 
     /* WhatsApp floating */
     .wa-float{
       position:fixed;right:18px;bottom:18px;z-index:99;
       display:inline-flex;align-items:center;justify-content:center;
-      width:54px;height:54px;border-radius:999px;
+      width:56px;height:56px;border-radius:999px;
       background:rgba(31,28,24,.92);color:#fff;
       border:1px solid rgba(255,255,255,.15);
       box-shadow:0 18px 45px rgba(0,0,0,.22);
     }
-    .wa-float__icon{font-weight:700;letter-spacing:.6px}
+    .wa-float svg{width:22px;height:22px;fill:#fff}
 
     /* Responsive */
     @media (max-width:980px){
@@ -150,8 +210,9 @@
       .hero__grid{grid-template-columns:1fr}
       .grid{grid-template-columns:1fr}
       .gallery{grid-template-columns:1fr}
-      .gallery img{height:300px}
+      .gallery img{height:320px}
       .contact{flex-direction:column;align-items:flex-start}
+      .btn{padding:12px 14px}
     }
   </style>
 </head>
@@ -162,50 +223,112 @@
   <div class="container nav">
     <div class="brand">
       <div class="brand__name">Cons Vazquez</div>
-      <div class="brand__tag">Photo Studio</div>
+      <div class="brand__tag">Fotolibros personalizados · Córdoba</div>
     </div>
 
-    <nav class="nav__links">
+    <nav class="nav__links" aria-label="Navegación principal">
+      <a href="#como">Cómo funciona</a>
       <a href="#opciones">Opciones</a>
       <a href="#galeria">Ejemplos</a>
       <a href="#contacto">Contacto</a>
     </nav>
 
-    <a class="btn btn--primary" href="#contacto">WhatsApp</a>
+    <div class="nav__cta">
+      <a class="btn btn--ghost" href="#opciones">Precios</a>
+      <a class="btn btn--primary"
+         href="https://wa.me/5493513532090?text=Hola%20Cons!%20Quiero%20hacer%20un%20fotolibro%20personalizado.%20Te%20cuento%20mi%20idea%3A"
+         target="_blank" rel="noopener"
+         aria-label="Abrir WhatsApp para consultar por un fotolibro">
+        WhatsApp
+      </a>
+    </div>
   </div>
 </header>
 
 <main>
 
 <section class="hero hero--image">
-  <div class="hero__bg"></div>
+  <div class="hero__bg" aria-hidden="true"></div>
 
   <div class="container hero__grid">
     <div>
-      <h1>Fotolibros de autor</h1>
-      <p class="lead">Historias que se tocan y se guardan.</p>
+      <div class="pill"><span class="dot" aria-hidden="true"></span>Diseño editorial · Curaduría estética · Proceso completo</div>
+
+      <h1>Fotolibros personalizados de autor</h1>
+      <p class="lead">Tus recuerdos, diseñados para durar.</p>
       <p class="lead2">
-        Diseño fotolibros para viajes, historias familiares y proyectos especiales.
-        Me ocupo de todo el proceso para que vos solo disfrutes el resultado final.
+        Fotolibros para <strong>viajes</strong>, <strong>historias familiares</strong> y <strong>regalos importantes</strong>.
+        Vos me compartís tus fotos; yo transformo ese material en un libro con estética, emoción y claridad.
       </p>
 
       <div class="hero__cta">
-        <a class="btn btn--primary" href="#opciones">Ver opciones</a>
+        <a class="btn btn--primary"
+           href="https://wa.me/5493513532090?text=Hola%20Cons!%20Quiero%20hacer%20un%20fotolibro%20personalizado.%20Mi%20historia%20es%3A"
+           target="_blank" rel="noopener">
+          Quiero mi fotolibro por WhatsApp
+        </a>
         <a class="btn btn--ghost" href="#galeria">Ver ejemplos</a>
       </div>
+
+      <p class="micro">Respuesta por WhatsApp · Te recomiendo el formato ideal según tu historia y cantidad de fotos.</p>
     </div>
 
     <div class="card">
       <h2 class="card__title">Consulta rápida</h2>
       <p class="card__text">
-        Te ayudo a elegir el formato ideal según tu historia, cantidad de fotos y objetivo.
+        Para recomendarte la mejor opción, decime:
+        <strong>tipo de historia</strong> + <strong>cantidad estimada de fotos</strong> + <strong>para cuándo lo necesitás</strong>.
       </p>
 
       <a class="btn btn--primary btn--full"
-         href="https://wa.me/5493513532090?text=Hola%20Cons!%20Quiero%20hacer%20un%20fotolibro."
-         target="_blank">
+         href="https://wa.me/5493513532090?text=Hola%20Cons!%20Quiero%20hacer%20un%20fotolibro.%20Historia%3A%20_____%20%7C%20Fotos%3A%20_____%20%7C%20Fecha%3A%20_____"
+         target="_blank" rel="noopener">
         Escribirme por WhatsApp
       </a>
+    </div>
+  </div>
+</section>
+
+<section id="como" class="section section--soft">
+  <div class="container">
+    <h2>Cómo funciona</h2>
+    <p class="subtitle">Simple, guiado y sin vueltas: vos aportás el material, yo hago el trabajo editorial.</p>
+
+    <div class="grid">
+      <div class="feat">
+        <h3>1) Me contás tu idea</h3>
+        <p>Por WhatsApp definimos objetivo, estilo y formato. Si es regalo, ajustamos tono y fecha de entrega.</p>
+      </div>
+      <div class="feat">
+        <h3>2) Enviás tus fotos</h3>
+        <p>Te indico cómo seleccionar o me mandás todo y hago curaduría estética para que el libro “respire”.</p>
+      </div>
+      <div class="feat">
+        <h3>3) Diseño + revisiones</h3>
+        <p>Te envío un boceto para revisar y ajustar. Luego se prepara el archivo final para impresión.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Por qué funciona</h2>
+    <p class="subtitle">No es “un álbum”. Es una pieza editorial: orden, ritmo visual y emoción bien contada.</p>
+
+    <div class="grid">
+      <div class="feat">
+        <h3>Curaduría estética</h3>
+        <p>Selecciono y ordeno para que cada página tenga intención y coherencia visual.</p>
+      </div>
+      <div class="feat">
+        <h3>Diseño editorial</h3>
+        <p>Composición, espacios, tipografía y narrativa: el libro se lee y se disfruta.</p>
+      </div>
+      <div class="feat">
+        <h3>Proceso completo</h3>
+        <p>Te acompaño de principio a fin para que no te “quede pendiente” por meses.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -213,73 +336,146 @@
 <section id="opciones" class="section">
   <div class="container">
     <h2>Opciones de fotolibros</h2>
+    <p class="subtitle">Elegí una base y la ajustamos según tu historia. Si dudás, me escribís y te lo dejo resuelto.</p>
 
     <div class="grid">
       <article class="pricing">
-        <h3>Viaje</h3>
+        <div>
+          <h3>Viaje</h3>
+          <div class="pricing__meta">
+            <span class="tag">Ideal: 1 viaje</span>
+            <span class="tag">Enfoque: narrativa + estética</span>
+          </div>
 
-        <div class="option">
-          <strong>Opción S · Recuerdo</strong>
-          <span class="price">ARS 120.000</span>
-          <ul>
-            <li>10 láminas · hasta 60 fotos</li>
-            <li>Formato 20 × 40</li>
-            <li>1 ronda de ajustes</li>
-          </ul>
+          <div class="option">
+            <strong>Opción S · Recuerdo</strong>
+            <span class="price">ARS 120.000</span>
+            <ul>
+              <li>10 láminas · hasta 60 fotos</li>
+              <li>Formato 20 × 40</li>
+              <li>1 ronda de ajustes</li>
+            </ul>
+          </div>
+
+          <div class="option">
+            <strong>Opción M · Viaje completo</strong>
+            <span class="price">ARS 160.000</span>
+            <ul>
+              <li>10 láminas · hasta 80 fotos</li>
+              <li>Formato 20 × 30</li>
+              <li>1 ronda de ajustes</li>
+            </ul>
+          </div>
+
+          <div class="option">
+            <strong>Opción L · Viaje extendido</strong>
+            <span class="price">ARS 210.000</span>
+            <ul>
+              <li>10 láminas · hasta 100 fotos</li>
+              <li>Formato 30 × 30</li>
+              <li>2 rondas de ajustes</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="option">
-          <strong>Opción M · Viaje completo</strong>
-          <span class="price">ARS 160.000</span>
-          <ul>
-            <li>10 láminas · hasta 80 fotos</li>
-            <li>Formato 20 × 30</li>
-            <li>1 ronda de ajustes</li>
-          </ul>
-        </div>
-
-        <div class="option">
-          <strong>Opción L · Viaje extendido</strong>
-          <span class="price">ARS 210.000</span>
-          <ul>
-            <li>10 láminas · hasta 100 fotos</li>
-            <li>Formato 30 × 30</li>
-            <li>2 rondas de ajustes</li>
-          </ul>
-        </div>
+        <a class="btn btn--primary btn--full"
+           href="https://wa.me/5493513532090?text=Hola%20Cons!%20Me%20interesa%20el%20fotolibro%20de%20Viaje.%20Historia%3A%20_____%20%7C%20Fotos%3A%20_____%20%7C%20Fecha%3A%20_____"
+           target="_blank" rel="noopener">
+          Consultar por Viaje
+        </a>
       </article>
 
       <article class="pricing">
-        <h3>Historia familiar</h3>
-        <span class="price">ARS 240.000</span>
-        <ul>
-          <li>15 láminas · hasta 120 fotos</li>
-          <li>Formato 30 × 22,5</li>
-          <li>Curaduría estética completa</li>
-          <li>2 rondas de ajustes</li>
-        </ul>
+        <div>
+          <h3>Historia familiar</h3>
+          <div class="pricing__meta">
+            <span class="tag">Ideal: familia / etapas</span>
+            <span class="tag">Regalo con peso</span>
+          </div>
+
+          <p style="margin:2px 0 0;color:rgba(31,28,24,.70);font-size:13px;line-height:1.55">
+            Pensado para contar una historia completa: infancia, cumpleaños, generaciones o una etapa familiar.
+          </p>
+
+          <div class="option" style="border-top:1px solid var(--line);">
+            <strong>Edición completa</strong>
+            <span class="price">ARS 240.000</span>
+            <ul>
+              <li>15 láminas · hasta 120 fotos</li>
+              <li>Formato 30 × 22,5</li>
+              <li>Curaduría estética completa</li>
+              <li>2 rondas de ajustes</li>
+            </ul>
+          </div>
+        </div>
+
+        <a class="btn btn--primary btn--full"
+           href="https://wa.me/5493513532090?text=Hola%20Cons!%20Me%20interesa%20Historia%20Familiar.%20Historia%3A%20_____%20%7C%20Fotos%3A%20_____%20%7C%20Fecha%3A%20_____"
+           target="_blank" rel="noopener">
+          Consultar Historia familiar
+        </a>
       </article>
 
       <article class="pricing">
-        <h3>Proyecto premium</h3>
-        <span class="price">ARS 330.000</span>
-        <ul>
-          <li>20 láminas · hasta 160 fotos</li>
-          <li>Formato 30 × 30</li>
-          <li>Diseño editorial integral</li>
-          <li>3 rondas de ajustes</li>
-        </ul>
+        <div>
+          <h3>Proyecto premium</h3>
+          <div class="pricing__meta">
+            <span class="tag">Edición integral</span>
+            <span class="tag">Máxima dedicación</span>
+          </div>
+
+          <p style="margin:2px 0 0;color:rgba(31,28,24,.70);font-size:13px;line-height:1.55">
+            Para proyectos más largos o exigentes (viaje largo, aniversario, serie de años, legado familiar).
+          </p>
+
+          <div class="option" style="border-top:1px solid var(--line);">
+            <strong>Edición premium</strong>
+            <span class="price">ARS 330.000</span>
+            <ul>
+              <li>20 láminas · hasta 160 fotos</li>
+              <li>Formato 30 × 30</li>
+              <li>Diseño editorial integral</li>
+              <li>3 rondas de ajustes</li>
+            </ul>
+          </div>
+        </div>
+
+        <a class="btn btn--primary btn--full"
+           href="https://wa.me/5493513532090?text=Hola%20Cons!%20Me%20interesa%20Proyecto%20Premium.%20Historia%3A%20_____%20%7C%20Fotos%3A%20_____%20%7C%20Fecha%3A%20_____"
+           target="_blank" rel="noopener">
+          Consultar Premium
+        </a>
       </article>
     </div>
+
+    <p class="micro" style="margin-top:18px">
+      *Precios orientativos. Si tu historia necesita más láminas o una edición especial, lo ajustamos.
+    </p>
   </div>
 </section>
 
 <section id="galeria" class="section section--soft">
   <div class="container">
     <h2>Ejemplos</h2>
+    <p class="subtitle">Dos referencias para que veas el estilo: limpio, editorial y con aire.</p>
+
     <div class="gallery">
-      <img src="img/bali.jpg" alt="Fotolibro de viaje Bali">
-      <img src="img/australia.jpg" alt="Fotolibro de viaje Australia">
+      <figure>
+        <img src="img/bali.jpg" alt="Fotolibro de viaje Bali" loading="lazy">
+        <figcaption>Viaje · ritmo visual + selección estética para que cada página tenga intención.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/australia.jpg" alt="Fotolibro de viaje Australia" loading="lazy">
+        <figcaption>Viaje largo · orden cronológico con narrativa y pausas visuales.</figcaption>
+      </figure>
+    </div>
+
+    <div style="margin-top:18px">
+      <a class="btn btn--primary"
+         href="https://wa.me/5493513532090?text=Hola%20Cons!%20Vi%20los%20ejemplos%20y%20quiero%20algo%20en%20ese%20estilo.%20Mi%20historia%20es%3A"
+         target="_blank" rel="noopener">
+        Quiero uno así — WhatsApp
+      </a>
     </div>
   </div>
 </section>
@@ -288,12 +484,12 @@
   <div class="container contact">
     <div>
       <h2>¿Armamos tu fotolibro?</h2>
-      <p>Escribime y vemos juntas la mejor forma de contar tu historia.</p>
+      <p>Escribime y lo dejamos encaminado hoy. Si me decís historia + fotos + fecha, te recomiendo la mejor opción.</p>
     </div>
 
     <a class="btn btn--primary"
-       href="https://wa.me/5493513532090?text=Hola%20Cons!%20Quiero%20empezar%20mi%20fotolibro."
-       target="_blank">
+       href="https://wa.me/5493513532090?text=Hola%20Cons!%20Quiero%20empezar%20mi%20fotolibro.%20Historia%3A%20_____%20%7C%20Fotos%3A%20_____%20%7C%20Fecha%3A%20_____"
+       target="_blank" rel="noopener">
       Contactar por WhatsApp
     </a>
   </div>
@@ -301,8 +497,15 @@
 
 </main>
 
-<a class="wa-float" href="https://wa.me/5493513532090" target="_blank">
-  <span class="wa-float__icon">WA</span>
+<a class="wa-float"
+   href="https://wa.me/5493513532090?text=Hola%20Cons!%20Quiero%20hacer%20un%20fotolibro%20personalizado."
+   target="_blank" rel="noopener"
+   aria-label="Abrir WhatsApp">
+  <!-- WhatsApp icon (simple) -->
+  <svg viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M19.11 17.27c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.15-.42-2.19-1.35-.81-.72-1.35-1.6-1.51-1.87-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.04-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27 0 1.33.98 2.62 1.12 2.8.14.18 1.93 2.95 4.68 4.13.65.28 1.16.45 1.56.58.66.21 1.26.18 1.74.11.53-.08 1.6-.65 1.82-1.29.23-.64.23-1.18.16-1.29-.07-.11-.25-.18-.52-.32z"/>
+    <path d="M26.7 5.3A13.77 13.77 0 0 0 16.02 1C8.3 1 2.02 7.29 2.02 15.01c0 2.47.65 4.88 1.88 7.01L2 31l9.17-1.85a13.9 13.9 0 0 0 6.65 1.69h.01c7.72 0 14-6.29 14-14 0-3.74-1.46-7.26-4.13-9.94zM16.02 28.47h-.01a11.5 11.5 0 0 1-5.86-1.6l-.42-.25-5.44 1.1 1.16-5.3-.27-.43a11.5 11.5 0 0 1-1.77-6.13C3.41 8.55 9.56 2.4 16.03 2.4c3.07 0 5.95 1.2 8.12 3.36a11.41 11.41 0 0 1 3.37 8.12c0 6.46-6.15 14.6-11.52 14.6z"/>
+  </svg>
 </a>
 
 <footer class="footer">
